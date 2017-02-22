@@ -1,7 +1,7 @@
-% ESTIMATE_PSDS Estimate power spectral densities
+% ESTIMATE_PSD Estimate power spectral densities
 %
 % Usage
-%    x_psds = estimate_psds(x, d, opt);
+%    x_psd = estimate_psd(x, d, opt);
 %
 % Input
 %    x: An array of size N1-by-...-by-Nd-by-n.
@@ -11,10 +11,10 @@
 %             the only option is 'periodogram' (default 'periodogram').
 %
 % Output
-%    x_psds: The estimated power spectral densities of size
+%    x_psd: The estimated power spectral densities of size
 %       N1-by-...-by-Nd-by-n.
 
-function x_psds = estimate_psds(x, d, opt)
+function x_psd = estimate_psd(x, d, opt)
     if nargin < 2 || isempty(d)
         d = 1;
     end
@@ -27,6 +27,6 @@ function x_psds = estimate_psds(x, d, opt)
         'type', 'periodogram');
 
     if strcmp(opt.type, 'periodogram')
-        x_psds = estimate_psds_periodogram(x, d, opt);
+        x_psd = estimate_psd_periodogram(x, d, opt);
     end
 end
