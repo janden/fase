@@ -1,13 +1,13 @@
-% GENERATE_FIELD Generate linear fields from power spectral densities
+% GENERATE_FIELD Generate linear fields from power spectral density
 %
 % Usage
-%    x = generate_field(sig_sz, psd_fun, opt);
+%    x = generate_field(sig_sz, n, psd_fun, opt);
 %
 % Input
 %    sig_sz: The desired size of the generated fields.
-%    psd_fun: A cell array of n function handles, each corresponding to the
-%       desired power spectral distribution of an individual field, defined
-%       over the domain [-1/2, 1/2]^d.
+%    n: The number of fields to generate.
+%    psd_fun: A function handle defining the desired power spectral density of
+%       the field, defined over the domain [-1/2, 1/2]^d.
 %    opt: An options structure containing the fields:
 %          - gen_sig_sz: The size of the generating white noise field. This
 %             has to be larger than or equal to sig_sz and it is recommended
@@ -21,20 +21,19 @@
 %    x: An array of size sig_sz-by-n containing the generated fields.
 %
 % Description
-%    For each of the n function handles in psd_fun, a white noise field of
-%    size gen_sig_sz is created. Its Fourier transform is then multiplied by
-%    the square root of the corresponding psd_fun function handle, evaluated
-%    at the Fourier frequency grid points. The Fourier transform is then
-%    inverted, and the topmost sig_sz subarray is extracted. As gen_sig_sz
-%    becomes larger, this will converge to a stationary field with the
-%    desired power spectral density.
+%    For each of the n fields, a white noise field of size gen_sig_sz is
+%    created. Its Fourier transform is then multiplied by the square root
+%    of psd_fun evaluated at the Fourier frequency grid points. The Fourier
+%    transform is then inverted, and the topmost sig_sz subarray is extracted.
+%    As gen_sig_sz becomes larger, this will converge to a stationary field
+%    with the desired power spectral density.
 
-function x = generate_field(sig_sz, psd_fun, opt)
-    if nargin < 2 || isempty(psd_fun)
+function x = generate_field(sig_sz, n, psd_fun, opt)
+    if nargin < 3 || isempty(psd_fun)
         psd_fun = @(r)(ones(size(r)));
     end
 
-    if nargin < 3 || isempty(opt)
+    if nargin < 4 || isempty(opt)
         opt = struct();
     end
 
@@ -43,8 +42,6 @@ function x = generate_field(sig_sz, psd_fun, opt)
         'gen_fun', @randn);
 
     d = numel(sig_sz);
-
-    n = numel(psd_fun);
 
     rngs = {};
     for l = 1:d
@@ -55,6 +52,8 @@ function x = generate_field(sig_sz, psd_fun, opt)
 
     grids = cell(1, d);
     [grids{:}] = ndgrid(rngs{:});
+
+    filter_f = sqrt(psd_fun(grids{:}));
 
     x = zeros([sig_sz n]);
 
@@ -71,7 +70,7 @@ function x = generate_field(sig_sz, psd_fun, opt)
         w = opt.gen_fun(opt.gen_sig_sz);
 
         wf = fftd(w, d);
-        xf_s = wf.*sqrt(psd_fun{s}(grids{:}));
+        xf_s = wf.*filter_f;
         x_s = ifftd(xf_s, d);
 
         idx_asgn.subs{d+1} = s;
