@@ -67,7 +67,7 @@ function x = generate_field(sig_sz, n, psd_fun, opt)
     idx_asgn.subs = repmat({':'}, 1, d);
 
     for s = 1:n
-        w = opt.gen_fun(opt.gen_sig_sz);
+        w = opt.gen_fun([opt.gen_sig_sz 1]);
 
         wf = fftd(w, d);
         xf_s = wf.*filter_f;
