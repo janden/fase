@@ -37,6 +37,10 @@ function x_mt = estimate_psd_multitaper(x, d, opt)
         error('opt.W must be strictly smaller than 0.5');
     end
 
+    if ~ismember(exist('dpss'), [2 3 5])
+        error('Function dpss is missing');
+    end
+
     sig_sz = size(x);
     sig_sz = sig_sz(1:d);
 
