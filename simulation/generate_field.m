@@ -71,7 +71,7 @@ function x = generate_field(sig_sz, n, psd_fun, opt)
 
         wf = fftd(w, d);
         xf_s = wf.*filter_f;
-        x_s = ifftd(xf_s, d);
+        x_s = real(ifftd(xf_s, d));
 
         idx_asgn.subs{d+1} = s;
 
