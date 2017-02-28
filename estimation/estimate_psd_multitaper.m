@@ -55,7 +55,7 @@ function x_mt = estimate_psd_multitaper(x, d, opt)
         E = bsxfun(@times, E, E_l);
     end
 
-    taper_sz = size(E);
+    taper_sz = [size(E) ones(1, 2*d-ndims(E))];
     taper_sz = taper_sz(d+1:2*d);
     taper_len = prod(taper_sz);
 
