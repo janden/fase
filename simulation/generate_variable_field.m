@@ -1,7 +1,7 @@
 % GENERATE_VARIABLE_FIELD Generate field by combining fixed sources
 %
 % Usage
-%    x = generate_variable_field(sig_sz, n, psd_fun, coeff_fun, opt);
+%    [x, coeff] = generate_variable_field(sig_sz, n, psd_fun, coeff_fun, opt);
 %
 % Input
 %    sig_sz: The desired size of the generated fields.
@@ -19,6 +19,8 @@
 %
 % Output
 %    x: An array of size sig_sz-by-n containing the generated fields.
+%    coeff: An array of size r-by-n containing the coefficients used when
+%       multiplying the fields prior to summation.
 %
 % Description
 %    For each of the r function handles in psd_fun, this function generates
@@ -27,7 +29,7 @@
 %    multiply the generated fields. These are then summed across l to yield
 %    n random fields.
 
-function x = generate_variable_field(sig_sz, n, psd_fun, coeff_fun, opt)
+function [x, coeff] = generate_variable_field(sig_sz, n, psd_fun, coeff_fun, opt)
     if nargin < 1 || isempty(sig_sz)
         error('sig_sz must be specified');
     end
@@ -63,10 +65,9 @@ function x = generate_variable_field(sig_sz, n, psd_fun, coeff_fun, opt)
     for l = 1:r
         x_l = generate_field(sig_sz, n, psd_fun{l}, opt);
 
-        coeff = coeff_fun{l}([n 1]);
-        coeff = permute(coeff, [2:d+1 1]);
+        coeff(l,:) = coeff_fun{l}([1 n]);
 
-        x_l = bsxfun(@times, x_l, coeff);
+        x_l = bsxfun(@times, x_l, permute(coeff(l,:)', [2:d+1 1]));
 
         x = x+x_l;
     end
