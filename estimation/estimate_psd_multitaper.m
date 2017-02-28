@@ -73,6 +73,6 @@ function x_mt = estimate_psd_multitaper(x, d, opt)
 
         x_tapered = bsxfun(@times, x, E_m);
 
-        x_mt = x_mt + 1/taper_len*estimate_psd_periodogram(x_tapered, d);
+        x_mt = x_mt + 1/taper_len*prod(sig_sz)*estimate_psd_periodogram(x_tapered, d);
     end
 end
