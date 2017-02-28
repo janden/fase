@@ -43,6 +43,10 @@ function x = generate_field(sig_sz, n, psd_fun, opt)
 
     d = numel(sig_sz);
 
+    if nargin(psd_fun) ~= d
+        error('psd_fun must accept d inputs');
+    end
+
     rngs = {};
     for l = 1:d
         rngs{l} = [0:floor(opt.gen_sig_sz(l)/2) ...
