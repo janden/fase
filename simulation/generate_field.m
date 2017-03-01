@@ -41,6 +41,8 @@ function x = generate_field(sig_sz, n, psd_fun, opt)
         'gen_sig_sz', 2*sig_sz, ...
         'gen_fun', @randn);
 
+    block_size = 4096;
+
     d = numel(sig_sz);
 
     if nargin(psd_fun) ~= d
@@ -70,15 +72,19 @@ function x = generate_field(sig_sz, n, psd_fun, opt)
     idx_asgn.type = '()';
     idx_asgn.subs = repmat({':'}, 1, d);
 
-    for s = 1:n
-        w = opt.gen_fun([opt.gen_sig_sz 1]);
+    for l = 1:ceil(n/block_size)
+        n_block = min(n-(l-1)*block_size, block_size);
+
+        w = opt.gen_fun([opt.gen_sig_sz n_block]);
 
         wf = fftd(w, d);
-        xf_s = wf.*filter_f;
-        x_s = real(ifftd(xf_s, d));
+        xf_block = bsxfun(@times, wf, filter_f);
+        x_block = real(ifftd(xf_block, d));
 
-        idx_asgn.subs{d+1} = s;
+        idx_ref.subs{d+1} = ':';
 
-        x = subsasgn(x, idx_asgn, subsref(x_s, idx_ref));
-    end
+        idx_asgn.subs{d+1} = (l-1)*block_size+[1:n_block];
+
+        x = subsasgn(x, idx_asgn, subsref(x_block, idx_ref));
+    end 
 end
