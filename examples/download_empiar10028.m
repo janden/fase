@@ -25,33 +25,35 @@ function download_empiar10028(url, location)
         location = 'data/empiar10028';
     end
 
+    hash_file = 'examples/datasets/empiar10028_hashes';
+
     if ~exist(location, 'dir')
         mkdir(location);
+    else
+        return;
     end
 
     particles_dir = 'data/Particles/';
 
-    subfolders{1} = 'MRC_0601/';
-    counts(1) = 600;
+    files = read_md5_hashes('examples/datasets/empiar10028_hashes');
 
-    subfolders{2} = 'MRC_1901/';
-    counts(2) = 481;
+    for k = 1:numel(files)
+        filename = fullfile(location, files(k).name);
 
-    file_fmt = '%03d_particles_shiny_nb50_new.mrcs';
+        subfolder_path = fileparts(filename);
 
-    for folder_ind = 1:numel(subfolders)
-        subfolder_path = fullfile(location, subfolders{folder_ind});
         if ~exist(subfolder_path, 'dir')
             mkdir(subfolder_path);
         end
 
-        for k = 1:counts(folder_ind)
-            file = sprintf(file_fmt, k);
+        file_url = [url particles_dir files(k).name];
 
-            file_url = [url particles_dir subfolders{folder_ind} file];
-            file_path = fullfile(subfolder_path, file);
+        urlwrite(file_url, filename);
+    end
 
-            urlwrite(file_url, file_path);
-        end
+    verified = verify_md5_hashes(location, hash_file);
+
+    if ~verified
+        warning('Downloaded empiar10028 dataset does not verify MD5 hashes.');
     end
 end

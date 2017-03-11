@@ -27,8 +27,12 @@ function download_frank70s(url, location)
         location = 'data/frank70s';
     end
 
+    hash_file = 'examples/datasets/frank70s_hashes';
+
     if ~exist(location, 'dir')
         mkdir(location);
+    else
+        return;
     end
 
     tar_file = fullfile(location, 'data.tar');
@@ -42,4 +46,10 @@ function download_frank70s(url, location)
     movefile(fullfile(location, 'win', '*.dat'), location)
 
     rmdir(fullfile(location, 'win'));
+
+    verified = verify_md5_hashes(location, hash_file);
+
+    if ~verified
+        warning('Downloaded frank70s dataset does not verify MD5 hashes.');
+    end
 end
