@@ -16,7 +16,7 @@
 function files = read_md5_hashes(hash_file)
     f = fopen(hash_file, 'r');
 
-    files = [];
+    files = struct([]);
 
     while ~feof(f)
         line = fgetl(f);
