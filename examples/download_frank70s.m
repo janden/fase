@@ -18,7 +18,7 @@
 %    Since it comes in a TAR archive, double this amount is needed on the disk
 %    for successful download and extraction.
 
-function download_frank70s(url, location)
+function location = download_frank70s(url, location)
     if nargin < 1 || isempty(url)
         url = 'ftp://ftp.ebi.ac.uk/pub/databases/emtest/SPIDER_FRANK_data/J-Frank_70s_real_data.tar';
     end

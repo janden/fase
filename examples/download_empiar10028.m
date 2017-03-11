@@ -16,7 +16,7 @@
 % Description
 %    This function downloads the EMPIAR-10028 dataset, which is of size 51 GB.
 
-function download_empiar10028(url, location)
+function location = download_empiar10028(url, location)
     if nargin < 1 || isempty(url)
         url = 'ftp://ftp.ebi.ac.uk/pub/databases/empiar/archive/10028/';
     end
