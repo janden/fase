@@ -28,9 +28,18 @@ function location = download_empiar10028(url, location)
     hash_file = 'examples/datasets/empiar10028_hashes';
 
     if ~exist(location, 'dir')
-        mkdir(location);
+        mkdirp(location);
     else
-        return;
+        files = read_md5_hashes(hash_file);
+
+        filenames = {files.name};
+
+        filenames = cellfun(@(x)(fullfile(location, x)), filenames, ...
+            'uniformoutput', false);
+
+        if all(cellfun(@(x)(exist(x, 'file')), filenames))
+            return;
+        end
     end
 
     particles_dir = 'data/Particles/';
