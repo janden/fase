@@ -52,7 +52,7 @@ function location = download_frank70s(url, location)
 
     delete(tar_file);
 
-    movefile(fullfile(location, 'win', '*.dat'), location)
+    movefile(fullfile(location, 'win', '*.dat'), location);
 
     rmdir(fullfile(location, 'win'));
 
