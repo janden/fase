@@ -10,6 +10,8 @@
 %       submitted to SampTA 2017, arXiv preprint arXiv:1702.04672.
 
 function fase_figure1()
+    fig_id = 1;
+
     idx = [9078 9935];
 
     location = download_frank70s();
@@ -32,8 +34,16 @@ function fase_figure1()
 
         im{k} = single(im{k});
 
+        figure(fig_id);
+        imagesc(im{k});
+        colormap gray;
+        axis square;
+        axis off;
+
         imagename = sprintf('output/fase_figure1%c.png', 'a'+(k-1));
 
         imwrite(im{k}, imagename);
+
+        fig_id = fig_id+1;
     end
 end
