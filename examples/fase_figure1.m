@@ -32,8 +32,6 @@ function fase_figure1()
         im{k} = im{k}-min(im{k}(:));
         im{k} = im{k}/max(im{k}(:));
 
-        im{k} = single(im{k});
-
         figure(fig_id);
         imagesc(im{k});
         colormap gray;
