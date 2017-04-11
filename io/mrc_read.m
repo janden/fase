@@ -19,7 +19,9 @@ function x = mrc_read(mrc, n)
     end
     N = mrc.header.N(1:2);
 
-    [x, count] = fread(mrc.fd, prod(N)*n, mrc.data_type);
+    precision = sprintf('%s=>%s', mrc.data_type, mrc.data_type);
+
+    [x, count] = fread(mrc.fd, prod(N)*n, precision);
 
     x = reshape(x, [N' count/prod(N)]);
 end

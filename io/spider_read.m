@@ -20,7 +20,7 @@ function x = spider_read(spider, n)
 
     N = [spider.header.nx spider.header.ny];
 
-    [x, count] = fread(spider.fd, prod(N)*n, 'float32');
+    [x, count] = fread(spider.fd, prod(N)*n, 'float32=>float32');
 
     x = reshape(x, [N count/prod(N)]);
 end
