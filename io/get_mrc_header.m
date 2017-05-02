@@ -8,8 +8,8 @@
 %
 % Output
 %    header: The header structure obtained from the MRC file.
-%    data_type: The datatype of the MRC file. One of 'schar', 'int16', or
-%       'float32'.
+%    data_type: The datatype of the MRC file. One of 'int8', 'int16', or
+%       'single'.
 %
 % Description
 %    This function provides a wrapper for the mrc_open and mrc_close

@@ -20,7 +20,7 @@ function mrc = mrc_open(filename)
     mrc.fd = fd;
     mrc.header = h;
 
-    datatypes = {'schar', 'int16', 'float32'};
+    datatypes = {'int8', 'int16', 'single'};
 
     mrc.data_type = datatypes{mrc.header.mode+1};
 
