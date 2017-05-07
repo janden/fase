@@ -14,7 +14,7 @@
 %       submitted to SampTA 2017, arXiv preprint arXiv:1702.04672.
 
 function fase_figure3ac(frank70s_location)
-    if nargin < 1 || isempty(location)
+    if nargin < 1 || isempty(frank70s_location)
         frank70s_location = 'data/frank70s';
     end
 
