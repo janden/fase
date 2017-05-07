@@ -13,7 +13,7 @@
 %       J. Andén and A. Singer, "Factor Analysis for Spectral Estimation,"
 %       submitted to SampTA 2017, arXiv preprint arXiv:1702.04672.
 
-function data = fase_figure3ac(frank70s_location)
+function fase_figure3ac(frank70s_location)
     if nargin < 1 || isempty(location)
         frank70s_location = 'data/frank70s';
     end
