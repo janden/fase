@@ -51,7 +51,8 @@ function fase_figure2ab()
     colormap gray;
     axis equal off;
 
-    print('-dpng', 'output/fase_figure2a_top.png');
+    imagename = 'output/fase_figure2a_top.png';
+    imwrite(x(:,:,ind1), imagename);
 
     fig_id = fig_id+1;
 
@@ -60,7 +61,8 @@ function fase_figure2ab()
     colormap gray;
     axis equal off;
 
-    print('-dpng', 'output/fase_figure2a_bottom.png');
+    imagename = 'output/fase_figure2a_bottom.png';
+    imwrite(x(:,:,ind2), imagename);
 
     fig_id = fig_id+1;
 
