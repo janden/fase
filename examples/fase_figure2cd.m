@@ -33,6 +33,8 @@ function data = fase_figure2cd()
     r = numel(psd_fun);
 
     for trial = 1:trials
+        randn('state', trial);
+
         for N_ind = 1:numel(Ns)
             N = Ns(N_ind);
 
