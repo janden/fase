@@ -20,7 +20,7 @@ function data = fase_figure3ac(frank70s_location)
 
     fig_id = 8;
 
-    r = 4;
+    r = 2;
     W = 1/65;
 
     n_eig = 16;
