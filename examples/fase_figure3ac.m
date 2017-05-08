@@ -88,4 +88,5 @@ function fase_figure3ac(frank70s_location)
     xlim([0 N/4]/N);
     set(gca, 'fontsize', font_size);
     set(gca, 'xtick', [0:0.05:0.25], 'ytick', [0:5:15]);
+    legend('Mean', '#9078', '#9935', 'location', 'northeast');
 end
