@@ -9,7 +9,7 @@
 %       J. Andén and A. Singer, "Factor Analysis for Spectral Estimation,"
 %       submitted to SampTA 2017, arXiv preprint arXiv:1702.04672.
 
-function fase_figure2ab()
+function data = fase_figure2ab()
     fig_id = 3;
 
     N = 32;
@@ -45,48 +45,55 @@ function fase_figure2ab()
     corr2 = (coeff_sq(:,ind1)'*A*coeff_sq)./(psd_norm(ind1)*psd_norm);
     [~, ind2] = min(corr2);
 
+    % Extract these sample images.
     im1 = x(:,:,ind1);
 
     im1 = im1-min(im1(:));
     im1 = im1/max(im1(:));
-
-    % Display the sample images from these PSDs.
-    figure(fig_id);
-    imagesc(im1);
-    colormap gray;
-    axis equal off;
-
-    imagename = 'output/fase_figure2a_top.png';
-    imwrite(im1, imagename);
 
     im2 = x(:,:,ind2);
 
     im2 = im2-min(im2(:));
     im2 = im2/max(im2(:));
 
-    fig_id = fig_id+1;
-
-    figure(fig_id);
-    imagesc(im2);
-    colormap gray;
-    axis equal off;
-
-    imagename = 'output/fase_figure2a_bottom.png';
-    imwrite(im2, imagename);
-
-    fig_id = fig_id+1;
-
     % Calculate the periodogram and estimate the PSD covariance.
     x_per = estimate_psd_periodogram(x, 2);
     Sigma_n = estimate_psd_covariance(x_per);
 
-    % Calculate the top eigenvalues and display them.
+    % Calculate the top eigenvalues.
     [~, D] = mdim_eig(Sigma_n);
     lambda = diag(D);
     lambda = sort(lambda, 'descend');
 
+    data.im1 = im1;
+    data.im2 = im2;
+
+    data.lambda = lambda;
+
+    % Display the sample images.
     figure(fig_id);
-    bar(lambda(1:16));
+    imagesc(data.im1);
+    colormap gray;
+    axis equal off;
+
+    imagename = 'output/fase_figure2a_top.png';
+    imwrite(data.im1, imagename);
+
+    fig_id = fig_id+1;
+
+    figure(fig_id);
+    imagesc(data.im2);
+    colormap gray;
+    axis equal off;
+
+    imagename = 'output/fase_figure2a_bottom.png';
+    imwrite(data.im2, imagename);
+
+    fig_id = fig_id+1;
+
+    % Display the top eigenvalues.
+    figure(fig_id);
+    bar(data.lambda(1:16));
     colormap('gray');
     set(gca, 'xtick', 1:16);
     set(gca, 'ytick', 0:100:500);
