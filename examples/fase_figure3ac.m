@@ -99,7 +99,10 @@ function data = fase_figure3ac(frank70s_location)
     xlim([0 data.N/4]/data.N);
     set(gca, 'fontsize', font_size);
     set(gca, 'xtick', [0:0.05:0.25], 'ytick', [0:5:20]);
-    legend('Mean', '#9078', '#9935', 'location', 'northeast');
+
+    hleg = legend('Mean', '#9078', '#9935', 'location', 'northeast');
+    pos = get(hleg, 'position');
+    set(hleg, 'position', [pos(1)-0.15 pos(2)-0.10 pos(3)+0.1 pos(4)+0.05]);
 
     print('-depsc', 'output/fase_figure3c.eps');
 end
