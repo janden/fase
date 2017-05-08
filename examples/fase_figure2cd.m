@@ -23,7 +23,7 @@ function data = fase_figure2cd()
 
     colors = {[0 0.2 0.7], [0 0.7 0.2], [0.7 0 0], [0 0 0]};
     linewidth = 3;
-    markersize = 10;
+    markersize = 15;
 
     % Define the two PSDs that we will use.
     psd_fun = {};
