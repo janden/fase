@@ -39,6 +39,8 @@ function fase_figure3ac(frank70s_location)
 
     x = bsxfun(@minus, x, x_mean);
 
+    x = bsxfun(@minus, x, mean(mean(x, 1), 2));
+
     x = x/std(x(:));
 
     x_per = estimate_psd_periodogram(x, 2, []);
@@ -85,5 +87,5 @@ function fase_figure3ac(frank70s_location)
     ylim([0 1.1*max([mu_n; x_mt_proj1; x_mt_proj2])]);
     xlim([0 N/4]/N);
     set(gca, 'fontsize', font_size);
-    set(gca, 'xtick', [0:0.05:0.25], 'ytick', [0:25:100]);
+    set(gca, 'xtick', [0:0.05:0.25], 'ytick', [0:5:15]);
 end
