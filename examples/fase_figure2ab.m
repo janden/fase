@@ -97,7 +97,7 @@ function data = fase_figure2ab()
     figure(fig_id);
     bar(data.lambda(1:16));
     colormap('gray');
-    set(gca, 'xtick', 1:16);
+    set(gca, 'xtick', [1 16]);
     set(gca, 'ytick', 0:100:500);
     set(gca, 'fontsize', font_size);
     xlim([1 16]+[-0.6 0.6]);
