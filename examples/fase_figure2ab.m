@@ -22,6 +22,8 @@ function data = fase_figure2ab()
     psd_fun{1} = @(x, y)(2*double(hypot(x, y)<0.125));
     psd_fun{2} = @(x, y)(1./(1+4*hypot(x, y)));
 
+    randn('state', 0);
+
     [x, coeff] = generate_variable_field(N*ones(1, 2), n, psd_fun, [], []);
 
     % To calculate the correlations between all the PSDS, it suffices to do
