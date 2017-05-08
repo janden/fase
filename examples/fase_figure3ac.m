@@ -73,6 +73,8 @@ function data = fase_figure3ac(frank70s_location)
     data.x_mt_proj2 = x_mt_proj2;
 
     figure(fig_id);
+    set(gcf, 'position', [400 400 800 400]);
+    set(gcf, 'paperposition', [0 0 8 4]);
     h = bar(data.lambda);
     ylim([0 1.1*data.lambda(1)]);
     xlim([1 16]+[-0.6 0.6]);
@@ -87,6 +89,8 @@ function data = fase_figure3ac(frank70s_location)
     freqs = [0:floor(data.N/2)-1]/data.N;
 
     figure(fig_id);
+    set(gcf, 'position', [400 400 800 400]);
+    set(gcf, 'paperposition', [0 0 8 4]);
     hold on;
     h(1) = plot(freqs, data.mu_n, 'color', colors{1}, ...
         'linewidth', linewidth, 'linestyle', '--');
