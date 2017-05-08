@@ -45,24 +45,34 @@ function fase_figure2ab()
     corr2 = (coeff_sq(:,ind1)'*A*coeff_sq)./(psd_norm(ind1)*psd_norm);
     [~, ind2] = min(corr2);
 
+    im1 = x(:,:,ind1);
+
+    im1 = im1-min(im1(:));
+    im1 = im1/max(im1(:));
+
     % Display the sample images from these PSDs.
     figure(fig_id);
-    imagesc(x(:,:,ind1));
+    imagesc(im1);
     colormap gray;
     axis equal off;
 
     imagename = 'output/fase_figure2a_top.png';
-    imwrite(x(:,:,ind1), imagename);
+    imwrite(im1, imagename);
+
+    im2 = x(:,:,ind2);
+
+    im2 = im2-min(im2(:));
+    im2 = im2/max(im2(:));
 
     fig_id = fig_id+1;
 
     figure(fig_id);
-    imagesc(x(:,:,ind2));
+    imagesc(im2);
     colormap gray;
     axis equal off;
 
     imagename = 'output/fase_figure2a_bottom.png';
-    imwrite(x(:,:,ind2), imagename);
+    imwrite(im2, imagename);
 
     fig_id = fig_id+1;
 
