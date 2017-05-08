@@ -79,7 +79,8 @@ function data = fase_figure3ac(frank70s_location)
     ylim([0 4e-6]);
     xlim([1 16]+[-0.6 0.6]);
     set(gca, 'fontsize', font_size);
-    set(gca, 'xtick', [1 16], 'ytick', [0 2e-6 4e-6], 'yticklabel', {'0', '2e-6', '4e-6'});
+    set(gca, 'xtick', [1 16], 'ytick', [0 2e-6 4e-6], ...
+        'yticklabel', {'0', '2e-6', '4e-6'});
     set(h, 'facecolor', colors{4});
 
     print('-depsc', 'output/fase_figure3a.eps');
@@ -109,9 +110,11 @@ function data = fase_figure3ac(frank70s_location)
     ylim([0 12e-4]);
     xlim([0 data.N/4]/data.N);
     set(gca, 'fontsize', font_size);
-    set(gca, 'xtick', [0:0.05:0.25], 'ytick', [0 5e-4 10e-4], 'yticklabel', {'0', '5e-4', '1e-3'});
+    set(gca, 'xtick', [0:0.05:0.25], 'ytick', [0 5e-4 10e-4], ...
+        'yticklabel', {'0', '5e-4', '1e-3'});
 
-    hleg = legend(h([1 3 5]), 'Mean', '#9078', '#9935', 'location', 'northeast');
+    hleg = legend(h([1 3 5]), 'Mean', '#9078', '#9935', ...
+        'location', 'northeast');
     legend boxoff;
     pos = get(hleg, 'position');
     set(hleg, 'position', [pos(1)-0.15 pos(2)-0.10 pos(3)+0.1 pos(4)+0.05]);
