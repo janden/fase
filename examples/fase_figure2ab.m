@@ -15,7 +15,7 @@ function data = fase_figure2ab()
     N = 32;
     n = 1024;
 
-    font_size = 16;
+    font_size = 24;
 
     % Define the two PSDs that we will use and generate the data.
     psd_fun = {};

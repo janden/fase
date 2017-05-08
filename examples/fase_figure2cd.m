@@ -19,7 +19,7 @@ function data = fase_figure2cd()
     W1 = 1/16;
     W2 = 1/64;
 
-    font_size = 16;
+    font_size = 24;
 
     colors = {[0 0.2 0.7], [0 0.7 0.2], [0.7 0 0], [0 0 0]};
     linewidth = 3;

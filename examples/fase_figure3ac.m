@@ -25,7 +25,7 @@ function data = fase_figure3ac(frank70s_location)
 
     n_eig = 16;
 
-    font_size = 16;
+    font_size = 36;
 
     colors = {[0 0.2 0.7], [0 0.7 0.2], [0.7 0 0], [0 0 0]};
     linewidth = 3;
