@@ -75,11 +75,11 @@ function data = fase_figure3ab(frank70s_location)
     figure(fig_id);
     set(gcf, 'position', [400 400 800 400]);
     set(gcf, 'paperposition', [0 0 8 4]);
-    h = bar(data.lambda);
-    ylim([0 1.1*data.lambda(1)]);
+    h = bar(data.lambda/data.N^4);
+    ylim([0 4e-6]);
     xlim([1 16]+[-0.6 0.6]);
     set(gca, 'fontsize', font_size);
-    set(gca, 'xtick', [1 16], 'ytick', [0:250:1000]);
+    set(gca, 'xtick', [1 16], 'ytick', [0 2e-6 4e-6], 'yticklabel', {'0', '2e-6', '4e-6'});
     set(h, 'facecolor', colors{4});
 
     print('-depsc', 'output/fase_figure3a.eps');
@@ -92,17 +92,17 @@ function data = fase_figure3ab(frank70s_location)
     set(gcf, 'position', [400 400 800 400]);
     set(gcf, 'paperposition', [0 0 8 4]);
     hold on;
-    h(1) = plot(freqs, data.mu_n, 'color', colors{1}, ...
+    h(1) = plot(freqs, data.mu_n/data.N^2, 'color', colors{1}, ...
         'linewidth', linewidth, 'linestyle', '--');
-    h(2) = plot(freqs, data.x_mt_proj1, 'color', colors{2}, ...
+    h(2) = plot(freqs, data.x_mt_proj1/data.N^2, 'color', colors{2}, ...
         'linewidth', linewidth, 'linestyle', '-');
-    h(3) = plot(freqs, data.x_mt_proj2, 'color', colors{3}, ...
+    h(3) = plot(freqs, data.x_mt_proj2/data.N^2, 'color', colors{3}, ...
         'linewidth', linewidth, 'linestyle', '-');
     hold off;
-    ylim([0 1.1*max([data.mu_n; data.x_mt_proj1; data.x_mt_proj2])]);
+    ylim([0 12e-4]);
     xlim([0 data.N/4]/data.N);
     set(gca, 'fontsize', font_size);
-    set(gca, 'xtick', [0:0.05:0.25], 'ytick', [0:5:20]);
+    set(gca, 'xtick', [0:0.05:0.25], 'ytick', [0 5e-4 10e-4], 'yticklabel', {'0', '5e-4', '1e-3'});
 
     hleg = legend('Mean', '#9078', '#9935', 'location', 'northeast');
     pos = get(hleg, 'position');
