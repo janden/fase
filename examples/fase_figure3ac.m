@@ -69,6 +69,8 @@ function fase_figure3ac(frank70s_location)
     set(gca, 'xtick', [1 16], 'ytick', [0:250:1000]);
     set(h, 'facecolor', colors{4});
 
+    print('-dpng', 'output/fase_figure3a.png');
+
     fig_id = fig_id+1;
 
     mu_n = max(0, mu_n(1:floor(N/2),1));
@@ -89,4 +91,6 @@ function fase_figure3ac(frank70s_location)
     set(gca, 'fontsize', font_size);
     set(gca, 'xtick', [0:0.05:0.25], 'ytick', [0:5:15]);
     legend('Mean', '#9078', '#9935', 'location', 'northeast');
+
+    print('-dpng', 'output/fase_figure3c.png');
 end
