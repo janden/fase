@@ -1,4 +1,4 @@
-% FASE_FIGURE3AB Generate Figure 3a and 3b from the FASE paper
+% FASE_FIGURE3AC Generate Figure 3a and 3c from the FASE paper
 %
 % Usage
 %    fase_figure3ab(frank70s_location);
@@ -8,12 +8,12 @@
 %       'data/frank70s').
 %
 % Description
-%    Generate Figures 3a and 3b from
+%    Generate Figures 3a and 3c from
 %
 %       J. Andén and A. Singer, "Factor Analysis for Spectral Estimation,"
 %       submitted to SampTA 2017, arXiv preprint arXiv:1702.04672.
 
-function data = fase_figure3ab(frank70s_location)
+function data = fase_figure3ac(frank70s_location)
     if nargin < 1 || isempty(frank70s_location)
         frank70s_location = 'data/frank70s';
     end
@@ -116,5 +116,5 @@ function data = fase_figure3ab(frank70s_location)
     pos = get(hleg, 'position');
     set(hleg, 'position', [pos(1)-0.15 pos(2)-0.10 pos(3)+0.1 pos(4)+0.05]);
 
-    print('-depsc', 'output/fase_figure3b.eps');
+    print('-depsc', 'output/fase_figure3c.eps');
 end
