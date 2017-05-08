@@ -87,6 +87,7 @@ function data = fase_figure3ab(frank70s_location)
     fig_id = fig_id+1;
 
     freqs = [0:floor(data.N/2)-1]/data.N;
+    [~, label_ind] = min(abs(freqs-0.05));
 
     figure(fig_id);
     set(gcf, 'position', [400 400 800 400]);
@@ -96,15 +97,21 @@ function data = fase_figure3ab(frank70s_location)
         'linewidth', linewidth, 'linestyle', '--');
     h(2) = plot(freqs, data.x_mt_proj1/data.N^2, 'color', colors{2}, ...
         'linewidth', linewidth, 'linestyle', '-');
-    h(3) = plot(freqs, data.x_mt_proj2/data.N^2, 'color', colors{3}, ...
+    h(3) = plot(freqs(label_ind), data.x_mt_proj1(label_ind)/data.N^2, ...
+            'color', colors{2}, 'linewidth', linewidth, 'linestyle', '-', ...
+            'marker', 's', 'markersize', 15);
+    h(4) = plot(freqs, data.x_mt_proj2/data.N^2, 'color', colors{3}, ...
         'linewidth', linewidth, 'linestyle', '-');
+    h(5) = plot(freqs(label_ind), data.x_mt_proj2(label_ind)/data.N^2, ...
+            'color', colors{3}, 'linewidth', linewidth, 'linestyle', '-', ...
+            'marker', 'o', 'markersize', 15);
     hold off;
     ylim([0 12e-4]);
     xlim([0 data.N/4]/data.N);
     set(gca, 'fontsize', font_size);
     set(gca, 'xtick', [0:0.05:0.25], 'ytick', [0 5e-4 10e-4], 'yticklabel', {'0', '5e-4', '1e-3'});
 
-    hleg = legend('Mean', '#9078', '#9935', 'location', 'northeast');
+    hleg = legend(h([1 3 5]), 'Mean', '#9078', '#9935', 'location', 'northeast');
     pos = get(hleg, 'position');
     set(hleg, 'position', [pos(1)-0.15 pos(2)-0.10 pos(3)+0.1 pos(4)+0.05]);
 
