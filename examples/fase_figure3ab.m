@@ -112,6 +112,7 @@ function data = fase_figure3ab(frank70s_location)
     set(gca, 'xtick', [0:0.05:0.25], 'ytick', [0 5e-4 10e-4], 'yticklabel', {'0', '5e-4', '1e-3'});
 
     hleg = legend(h([1 3 5]), 'Mean', '#9078', '#9935', 'location', 'northeast');
+    legend boxoff;
     pos = get(hleg, 'position');
     set(hleg, 'position', [pos(1)-0.15 pos(2)-0.10 pos(3)+0.1 pos(4)+0.05]);
 
