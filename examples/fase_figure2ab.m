@@ -102,7 +102,7 @@ function data = fase_figure2ab()
     set(gca, 'fontsize', font_size);
     xlim([1 16]+[-0.6 0.6]);
 
-    print('-dpng', 'output/fase_figure2b.png');
+    print('-depsc', 'output/fase_figure2b.eps');
 
     fig_id = fig_id+1;
 end

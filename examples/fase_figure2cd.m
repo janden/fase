@@ -140,7 +140,7 @@ function data = fase_figure2cd()
         set(gca, 'xtick', [1e2 1e3 1e4 1e5]);
         set(gca, 'ytick', [1e-2 1e-1 1e0]);
 
-        print('-dpng', sprintf('output/fase_figure2%c.png', 'c'+(N_ind-1)));
+        print('-depsc', sprintf('output/fase_figure2%c.eps', 'c'+(N_ind-1)));
 
         fig_id = fig_id+1;
     end
