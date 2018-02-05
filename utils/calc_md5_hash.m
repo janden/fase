@@ -23,10 +23,18 @@ function md5_str = calc_md5_hash(input, is_string)
     end
 
     if isoctave()
-        if ~is_string
-            md5_str = md5sum(input);
+        if exist('hash', 'builtin') ~= 0
+            if ~is_string
+                md5_str = hash('md5', fileread(input));
+            else
+                md5_str = hash('md5', typecast(input, 'char'));
+            end
         else
-            md5_str = md5sum(typecast(input, 'char'), true);
+            if ~is_string
+                md5_str = md5sum(input);
+            else
+                md5_str = md5sum(typecast(input, 'char'), true);
+            end
         end
     else
         digest = java.security.MessageDigest.getInstance('md5');
